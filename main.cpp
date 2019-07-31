@@ -1,10 +1,12 @@
 #include <iostream>
-#include <stdlib.h>
+//#include <stdlib.h>
+#include <fstream>
+
 using namespace std;
 
 void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
 {
-    system("cls");
+    //system("cls");
     for(int i = 0 ; i<5; i++)
     {
         for(int j=0; j<5;j++)
@@ -23,7 +25,6 @@ void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
                 {
                     cout<<'H';
                 }
-
             }
         }
 
@@ -31,17 +32,68 @@ void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
     }
 }
 
+string startGame()
+{
+    ifstream MyFileRead("GameData.txt");
+    string contentLine;
+    int numberLine = 0;
+    string gameStatus="0";
+
+    if(MyFileRead.is_open())
+    {
+            while (getline(MyFileRead,contentLine))
+            {
+               numberLine++;
+               if (numberLine==2)
+               {
+                    gameStatus= contentLine;
+                    break;
+               }
+            }
+    }
+    else
+    {
+        cout<<"No se encontro el archivo GameData.txt";
+    }
+
+    MyFileRead.close();
+    return gameStatus;
+}
+
+void saveGame(string nameHero)
+{
+    ofstream MyFileWrite("GameData.txt");
+
+        MyFileWrite<<"gameStart:"<<endl;
+        MyFileWrite<<"1"<<endl;
+        MyFileWrite<<"nameHero:"<<endl;
+        MyFileWrite<<nameHero<<endl;
+
+    MyFileWrite.close();
+}
+
 int main()
 {
-    int  heroPosX=2;
-    int  heroPosY=2;
+    string nameHero;
+
+    string start=startGame();
+
+    if (start=="0")
+    {
+        cout<<"Cual sera el nombre de tu heroe?";
+        cin>>nameHero;
+        saveGame(nameHero);
+    }
+
+    int  heroPosX=1;
+    int  heroPosY=0;
     bool isGameOver=false;
     char input=' ';
-    char gameMap[5][5]={{'1','1','1','1','1'},
+    char gameMap[5][5]={{'P','1','1','1','1'},
                         {'1','1','1','1','1'},
                         {'1','1','1','1','1'},
                         {'1','1','1','1','1'},
-                        {'1','1','1','1','1'}};
+                        {'1','1','1','1','S'}};
 
     while(isGameOver == false)
     {
@@ -54,11 +106,12 @@ int main()
         case'd': heroPosX++; break;
         case'w': heroPosY--; break;
         case's': heroPosY++; break;
-        case'p': isGameOver=true; break;
+        default: isGameOver=true; break;
         }
     }
 
+    cout<<"*******Termino el juego*******"<<endl;
+
     return 0;
 }
-
 

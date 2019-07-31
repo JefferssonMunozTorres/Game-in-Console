@@ -1,0 +1,4 @@
+gameStart:
+1
+nameHero:
+kiko

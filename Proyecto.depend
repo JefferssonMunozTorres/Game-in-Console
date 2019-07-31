@@ -1,4 +1,5 @@
 # depslib dependency file v1.0
-1564590796 source:c:\users\jeffersson\desktop\c++\proyecto\main.cpp
+1564603003 source:c:\users\jeffersson\desktop\c++\proyecto\main.cpp
 	<iostream>
+	<fstream>
 
