@@ -2,12 +2,12 @@
 #include <iostream>
 #include <fstream>
 
-
 using namespace std;
 
 GameMap::GameMap()
 {
     loadMapFromFile();
+    setGameOver(false);
 }
 
 void GameMap::draw(int PlayerX, int PlayerY)
@@ -27,7 +27,7 @@ void GameMap::draw(int PlayerX, int PlayerY)
                 }
                 else
                 {
-                 cout<<"3";
+                 cout<<"H";
                 }
             }
         }
@@ -37,16 +37,16 @@ void GameMap::draw(int PlayerX, int PlayerY)
 
 bool GameMap::validationPlayerCell(int PlayerX, int PlayerY)
 {
-    //cout<<"Las coordenadas del jugador estan en "<<PlayerX<<" , "<<PlayerY;
-    //cells[PlayerX][PlayerY].id=3;
-    //cout<<cells[PlayerX][PlayerY].id;
-
     if(cells[PlayerX][PlayerY].id=='1')
     {
         return true;
     }
     else
     {
+        if(cells[PlayerX][PlayerY].id=='$')
+        {
+            setGameOver(true);
+        }
         return false;
     }
 }
@@ -61,7 +61,7 @@ void GameMap::loadMapFromFile()
     {
         while(getline(MyMapFile,contentLine))
         {
-            //cout<<"***"<<contentLine<<"***";
+            //cout<<"***"<<contentLine<<"***"; //Ver el contenido de la linea extraida
          for(int i=0;i<contentLine.length();i++)
          {
              if(contentLine[i]=='0')
@@ -104,4 +104,34 @@ void GameMap::drawIntro()
     }
 
     MyIntroFile.close();
+}
+
+void GameMap::drawVictory()
+{
+    string contentLine;
+    ifstream MyVictFile("Victory.txt");
+
+    if(MyVictFile.is_open())
+    {
+        while(getline(MyVictFile,contentLine))
+        {
+          cout<<contentLine<<endl;
+        }
+    }
+    else
+    {
+        cout<<"FATAL ERROR: VICTORY COULD NOT BE LOADED!"<<endl;
+    }
+
+    MyVictFile.close();
+}
+
+bool GameMap::getGameOver()
+{
+    return gameOver;
+}
+
+void GameMap::setGameOver(bool status)
+{
+    gameOver=status;
 }

@@ -1,4 +1,4 @@
 gameStart:
-1
+0
 nameHero:
-kiko
+false

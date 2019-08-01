@@ -1,40 +1,11 @@
 #include <iostream>
-//#include <stdlib.h>
+#include <stdlib.h>
 #include <fstream>
 #include "Player.h"
 #include "MapCell.h"
 #include "GameMap.h"
 
 using namespace std;
-
-/*void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
-{
-    //system("cls");
-    for(int i = 0 ; i<5; i++)
-    {
-        for(int j=0; j<5;j++)
-        {
-            if(i!=heroPosY)
-            {
-                cout<<gameMap[i][j];
-            }
-            else
-            {
-                if(j!=heroPosX)
-                {
-                    cout<<gameMap[i][j];
-                }
-                else
-                {
-                    cout<<'H';
-                }
-            }
-        }
-
-        cout<<endl;
-    }
-}
-*/
 
 string startGame()
 {
@@ -45,15 +16,15 @@ string startGame()
 
     if(MyFileRead.is_open())
     {
-            while (getline(MyFileRead,contentLine))
+        while (getline(MyFileRead,contentLine))
+        {
+            numberLine++;
+            if (numberLine==2)
             {
-               numberLine++;
-               if (numberLine==2)
-               {
-                    gameStatus= contentLine;
-                    break;
-               }
+                gameStatus= contentLine;
+                break;
             }
+        }
     }
     else
     {
@@ -79,7 +50,6 @@ void saveGame(string nameHero)
 int main()
 {
     string nameHero;
-
     string start=startGame();
 
     if (start=="0")
@@ -88,18 +58,23 @@ int main()
         cin>>nameHero;
         saveGame(nameHero);
     }
-//**************************************
-    bool gameOver=false;
+
     Player hero;
     GameMap map;
 
     map.drawIntro();
+    system("cls");
     cout<<"Inicia el juego"<<endl;
+    cout<<map.getGameOver();
     map.draw(hero.getX(),hero.getY());
+    cout<<map.getGameOver();
 
-    while(gameOver==false)
+    while(map.getGameOver()==0)
     {
+
+       cout<<"Mueve a tu heroe hasta el tesoro con: 'w' 's' 'a' 'd' :"<<endl;
        hero.callInput();
+       system("cls");
        if(map.validationPlayerCell(hero.getX(),hero.getY()))
        {
          hero.resetPositionPlayer();
@@ -107,40 +82,17 @@ int main()
        }
        else
        {
-         map.draw(hero.getX(),hero.getY());
+           if(map.getGameOver())
+           {
+              map.drawVictory();
+           }
+           else
+           {
+              map.draw(hero.getX(),hero.getY());
+           }
+
        }
     }
-
-
-//*****************************************
-
-    /*int  heroPosX=1;
-    int  heroPosY=0;
-    bool isGameOver=false;
-    char input=' ';
-    char gameMap[5][5]={{'P','1','1','1','1'},
-                        {'1','1','1','1','1'},
-                        {'1','1','1','1','1'},
-                        {'1','1','1','1','1'},
-                        {'1','1','1','1','S'}};
-
-    while(isGameOver == false)
-    {
-        drawMap(heroPosX,heroPosY,gameMap);
-
-        cin>>input;
-
-        switch(input){
-        case'a': heroPosX--; break;
-        case'd': heroPosX++; break;
-        case'w': heroPosY--; break;
-        case's': heroPosY++; break;
-        default: isGameOver=true; break;
-        }
-    }
-
-    cout<<"*******Termino el juego*******"<<endl;
-    */
 
     return 0;
 }

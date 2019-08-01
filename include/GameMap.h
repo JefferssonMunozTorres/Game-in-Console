@@ -3,7 +3,6 @@
 
 #include "MapCell.h"
 
-
 class GameMap
 {
     public:
@@ -17,8 +16,16 @@ class GameMap
 
         void drawIntro();
 
+        void drawVictory();
+
+        bool getGameOver();
+
+        void setGameOver(bool Status);
+
     protected:
         void loadMapFromFile();
+
+        bool gameOver;
 
     private:
 };
