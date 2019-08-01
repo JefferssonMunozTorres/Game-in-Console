@@ -1,10 +1,13 @@
 #include <iostream>
 //#include <stdlib.h>
 #include <fstream>
+#include "Player.h"
+#include "MapCell.h"
+#include "GameMap.h"
 
 using namespace std;
 
-void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
+/*void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
 {
     //system("cls");
     for(int i = 0 ; i<5; i++)
@@ -31,6 +34,7 @@ void drawMap(int heroPosX, int heroPosY, char gameMap[5][5])
         cout<<endl;
     }
 }
+*/
 
 string startGame()
 {
@@ -84,8 +88,29 @@ int main()
         cin>>nameHero;
         saveGame(nameHero);
     }
+//**************************************
+    bool gameOver=false;
+    Player hero;
+    GameMap map;
+    cout<<"Inicia el juego 2";
+    while(gameOver==false)
+    {
+       hero.callInput();
+       if(map.validationPlayerCell(hero.getX(),hero.getY()))
+       {
+         hero.resetPositionPlayer();
+         map.draw(hero.getX(),hero.getY());
+       }
+       else
+       {
+         map.draw(hero.getX(),hero.getY());
+       }
+    }
 
-    int  heroPosX=1;
+
+//*****************************************
+
+    /*int  heroPosX=1;
     int  heroPosY=0;
     bool isGameOver=false;
     char input=' ';
@@ -111,6 +136,7 @@ int main()
     }
 
     cout<<"*******Termino el juego*******"<<endl;
+    */
 
     return 0;
 }

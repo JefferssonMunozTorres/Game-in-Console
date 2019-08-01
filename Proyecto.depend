@@ -1,5 +1,27 @@
 # depslib dependency file v1.0
-1564603003 source:c:\users\jeffersson\desktop\c++\proyecto\main.cpp
+1564612959 source:c:\users\jeffersson\desktop\c++\proyecto\main.cpp
 	<iostream>
 	<fstream>
+	"Player.h"
+	"MapCell.h"
+	"GameMap.h"
+
+1564612930 c:\users\jeffersson\desktop\c++\proyecto\include\player.h
+
+1564609235 c:\users\jeffersson\desktop\c++\proyecto\include\mapcell.h
+
+1564610124 source:c:\users\jeffersson\desktop\c++\proyecto\src\mapcell.cpp
+	"MapCell.h"
+
+1564612930 source:c:\users\jeffersson\desktop\c++\proyecto\src\gamemap.cpp
+	"GameMap.h"
+	<iostream>
+	<fstream>
+
+1564612687 c:\users\jeffersson\desktop\c++\proyecto\include\gamemap.h
+	"MapCell.h"
+
+1564613281 source:c:\users\jeffersson\desktop\c++\proyecto\src\player.cpp
+	"Player.h"
+	<iostream>
 
