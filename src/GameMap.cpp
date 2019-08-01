@@ -49,7 +49,6 @@ bool GameMap::validationPlayerCell(int PlayerX, int PlayerY)
     {
         return false;
     }
-
 }
 
 void GameMap::loadMapFromFile()
@@ -73,9 +72,6 @@ void GameMap::loadMapFromFile()
              {
                cells[row][i].id=contentLine[i];
              }
-
-
-
          }
          row++;
         }
@@ -84,4 +80,28 @@ void GameMap::loadMapFromFile()
     {
         cout<<"FATAL ERROR: MAP FILE COULD NOT BE LOADED!"<<endl;
     }
+
+    MyMapFile.close();
+}
+
+void GameMap::drawIntro()
+{
+    string contentLine;
+    ifstream MyIntroFile("Intro.txt");
+
+    if(MyIntroFile.is_open())
+    {
+        while(getline(MyIntroFile,contentLine))
+        {
+          cout<<contentLine<<endl;
+        }
+
+        cin>>contentLine;
+    }
+    else
+    {
+        cout<<"FATAL ERROR: INTRO COULD NOT BE LOADED!"<<endl;
+    }
+
+    MyIntroFile.close();
 }

@@ -15,6 +15,8 @@ class GameMap
 
         bool validationPlayerCell(int PlayerX, int PlayerY);
 
+        void drawIntro();
+
     protected:
         void loadMapFromFile();
 

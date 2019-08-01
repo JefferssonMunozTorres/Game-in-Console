@@ -92,7 +92,11 @@ int main()
     bool gameOver=false;
     Player hero;
     GameMap map;
-    cout<<"Inicia el juego 2";
+
+    map.drawIntro();
+    cout<<"Inicia el juego"<<endl;
+    map.draw(hero.getX(),hero.getY());
+
     while(gameOver==false)
     {
        hero.callInput();
